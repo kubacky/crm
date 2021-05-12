@@ -1,0 +1,49 @@
+<mat-form-field hintLabel="Wyszukaj klienta po nazwie" color="accent" fxFlex="calc(100%-60px)" [formGroup]="form">
+  <input matInput [placeholder]="placeholder" [matAutocomplete]="auto" formControlName="query" [required]="true">
+  <mat-hint align="end">Lub dodaj nowego</mat-hint>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)" [displayWith]="displayWithFn">
+
+    <!-- spinner -->
+    <mat-option *ngIf="spinner" class="m-b-20 t-center m-t-20" fxLayoutAlign="center center">
+      <mat-spinner fxLayoutAlign="center center" diameter="50" color="primary"></mat-spinner>
+    </mat-option>
+    <!-- /spinner -->
+
+    <!-- no results -->
+    <mat-option *ngIf="!spinner && customers.length === 0 && form.get('query').value.length > 2" class="m-b-20 t-center m-t-20">
+      <p class="m-0 t-thin t-dark-gray">Nie znaleziono wyników</p>
+    </mat-option>
+    <!-- /no results -->
+
+    <!-- results -->
+    <ng-container *ngIf="!spinner">
+      <div *ngFor="let customer of customers">
+        <mat-option [value]="customer">
+          <p class="m-0 t-thin">{{ customer.name }}
+            <span *ngIf="customer.alias.length > 0">|
+              <small class="t-muted">{{ customer.alias }}</small>
+            </span>
+          </p>
+          <p class="m-t-5 m-b-0 t-dark-gray t-thin">
+            <small>{{ customer.address.street }}, {{ customer.address.postcode }} {{ customer.address.city }}</small>
+          </p>
+        </mat-option>
+        <div *ngIf="customer.branches.length > 0">
+          <mat-option *ngFor="let branch of customer.branches" [value]="branch.name" (click)="getCustomer(branch.id)" class="p-l-40">
+            <p class="m-0 f-s-12">{{ customer.name }} - {{ branch.name }}
+              <span *ngIf="branch.alias.length > 0">|
+                <small class="t-muted">{{ branch.alias }}</small>
+              </span>
+            </p>
+            <p class="m-0 f-s-12">
+              <small>{{ branch.address.street }}, {{ branch.address.postcode }} {{ branch.address.city }}</small>
+            </p>
+          </mat-option>
+        </div>
+      </div>
+    </ng-container>
+    <!-- /results -->
+
+  </mat-autocomplete>
+</mat-form-field>
+<crm-new-customer-button fxFlex="60px"></crm-new-customer-button>

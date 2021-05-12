@@ -1,0 +1,59 @@
+<form [formGroup]="form" fxFlex="100" fxLayout="row wrap" (submit)="save()">
+
+  <!-- registryNo + servicePeriod + customer -->
+  <div fxFlex="100" class="m-b-50 m-t-20" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field color="accent" fxFlex="100" fxFlex.gt-sm="calc(33.333333% - 20px)">
+      <input matInput placeholder="Numer rejestru" formControlName="registryNo" [required]="true">
+      <mat-error *ngIf="form.get('registryNo').errors?.isNumberTaken">Podany numer jest już zajęty</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent" fxFlex="100" fxFlex.gt-sm="calc(20% - 20px)">
+      <mat-select placeholder="Okres serwisowania" formControlName="servicePeriod" [required]="true">
+        <mat-option value="12">12 miesięcy</mat-option>
+        <mat-option value="24">24 miesiące</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <crm-customer-autocomplete [placeholder]="'Klient'" fxFlex="100" fxFlex.gt-sm="calc(46.66666% - 20px)"></crm-customer-autocomplete>
+  </div>
+  <!-- /registryNo + customer -->
+
+  <!-- properties -->
+  <crm-device-properties fxFlex="100" class="p-b-20" fxLayout="row wrap" formGroupName="properties" [form]="form.get('properties')"></crm-device-properties>
+  <!-- /properties -->
+
+  <!-- purchaseDate + lastService + price -->
+  <div class="m-b-30" fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(33.333333% - 20px)" color="accent">
+      <input matInput [matDatepicker]="purchasePicker" placeholder="Data zakupu" [required]="true" formControlName="purchaseDate">
+      <mat-datepicker-toggle matSuffix [for]="purchasePicker"></mat-datepicker-toggle>
+      <mat-datepicker #purchasePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(33.333333% - 20px)" color="accent">
+      <input matInput [matDatepicker]="servicePicker" placeholder="Ostatni serwis" formControlName="lastService" [min]="form.get('purchaseDate').value">
+      <mat-datepicker-toggle matSuffix [for]="servicePicker"></mat-datepicker-toggle>
+      <mat-datepicker #servicePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(33.333333% - 20px)" color="accent">
+      <input matInput type="number" placeholder="Cena zakupu" formControlName="price">
+    </mat-form-field>
+  </div>
+  <!-- /purchaseDate + lastService + price -->
+
+  <!-- comment -->
+  <div class="m-b-30" fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100">
+      <mat-label>Uwagi</mat-label>
+      <textarea formControlName="comment" matInput rows="5"></textarea>
+    </mat-form-field>
+  </div>
+  <!-- /comment -->
+
+
+  <crm-device-edit [form]="form"></crm-device-edit>
+
+  <!-- controls -->
+  <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid">Zapisz</button>
+    <button type="button" mat-button color="warn" (click)="cancel()">Anuluj</button>
+  </div>
+  <!-- /controls -->
+</form>

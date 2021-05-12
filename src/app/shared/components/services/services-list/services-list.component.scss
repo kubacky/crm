@@ -1,0 +1,17 @@
+mat-row.details-row {
+  height: 0;
+  min-height: 0;
+  transition: ease-out 0.25s;
+  border-bottom-width: 0px;
+}
+
+mat-row.details-row.expanded {
+  height: auto;
+  min-height: auto;
+  transition: ease-in 0.25s;
+  border-bottom-width: 1px;
+}
+
+mat-cell {
+  font-weight: 100
+}

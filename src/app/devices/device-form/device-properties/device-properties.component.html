@@ -1,0 +1,41 @@
+<div *ngIf="properties" [formGroup]="form" fxFlex="100" fxLayout="row wrap">
+  <div *ngFor="let property of properties" fxFlex="100" class="m-b-25">
+    <div [ngSwitch]="property.type">
+
+      <!-- list -->
+      <mat-form-field *ngSwitchCase="'list'" color="accent" fxFlex="100">
+        <mat-select placeholder="{{ property.name }}" formControlName="{{ property.id }}" [required]="property.required">
+          <mat-option *ngIf="!property.required">Brak</mat-option>
+          <mat-option *ngFor="let value of property.values" [value]="value.id">
+            {{ value.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- /list -->
+
+      <!-- radio -->
+      <div *ngSwitchCase="'radio'" fxFlex="100">
+        <h5 class="m-t-0 m-b-10 t-thin">{{ property.name }} <sup class="f-s-12" *ngIf="property.required" matTooltip="Wymagane">*</sup></h5>
+        <mat-radio-group formControlName="{{ property.id }}">
+          <mat-radio-button class="m-r-30 m-b-10" *ngIf="!property.required">Brak</mat-radio-button>
+          <mat-radio-button *ngFor="let value of property.values" [value]="value.id" class="m-r-30">{{ value.value }}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <!-- /radio -->
+
+      <!-- checkbox -->
+      <div fxFlex="100" *ngSwitchCase="'checkbox'">
+        <h6>{{ property.name }}</h6>
+        <mat-checkbox *ngFor="let value of property.values" [value]="value.id" class="m-r-30" formControlName="{{ property.id }}">{{ value.value }}</mat-checkbox>
+      </div>
+      <!-- /checkbox -->
+
+      <!-- text -->
+      <mat-form-field fxFlex="100" *ngSwitchCase="text" color="accent">
+        <input matInput type="text" placeholder="{{ property.name }}" formControlName="{{ property.id }}" [required]="property.required">
+      </mat-form-field>
+      <!-- /text -->
+
+    </div>
+  </div>
+</div>

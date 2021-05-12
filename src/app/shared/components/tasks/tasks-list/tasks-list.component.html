@@ -1,0 +1,8 @@
+<div fxFlex="100" class="p-t-20" fxLayout="row wrap"
+  *ngIf="tasks.length > 0; else noTasks">
+  <crm-task fxFlex="100" *ngFor="let task of tasks; let i = index" [task]="task"></crm-task>
+</div>
+
+<ng-template #noTasks>
+  <h4 class="p-t-50 p-b-50 t-center">Brak zadań</h4>
+</ng-template>

@@ -1,0 +1,9 @@
+<div fxLayout="row wrap" fxLayoutAlign="center">
+  <div class="m-t-30 p-b-30" fxFlex="95" fxLayout="row wrap" [hidden]="spinner">
+    <mat-icon class="la la-user f-s-36 m-r-30 t-white"></mat-icon>
+    <span class="f-s-18 p-t-10 t-white">Nowy klient</span>
+  </div>
+  <mat-card fxFlex="95" class="m-b-40">
+    <crm-customer-form fxFlex="100" (canceled)="onCancel($event)"></crm-customer-form>
+  </mat-card>
+</div>

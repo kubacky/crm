@@ -1,0 +1,45 @@
+<div [formGroup]="form" fxFlex="100" fxLayout="row wrap">
+  <mat-accordion formArrayName="branches" fxFlex="100" fxLayout="row wrap" [formGroup]="form" [multi]="true">
+
+    <!-- branch -->
+    <mat-expansion-panel *ngFor="let branch of form.get('branches').controls; let i = index" formGroupName="{{ i }}" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span *ngIf="form.get('branches').controls[i].controls['name'].value.length === 0">
+            Oddział {{ i + 1 }}
+          </span>
+          <span *ngIf="form.get('branches').controls[i].controls['name'].value.length > 0">
+            {{ form.get('branches').controls[i].controls['name'].value }}
+          </span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div fxFlex="100" fxLayout="row wrap">
+        <!-- name -->
+        <mat-form-field fxFlex="100" class="m-b-20" color="accent">
+          <input type="text" matInput placeholder="Nazwa oddziału" formControlName="name" [required]="true">
+        </mat-form-field>
+        <!-- /name -->
+
+        <!-- address -->
+        <h4 class="m-b-10 m-t-0 t-thin">Adres</h4>
+        <crm-address-form class="m-b-20" [form]="form.get('branches').controls[i]" fxFlex="100" fxLayout="row wrap"></crm-address-form>
+        <!-- /address -->
+
+        <!-- contact -->
+        <h4 class="m-b-10 m-t-30 t-thin">Osoba do kontaktu</h4>
+        <crm-contact-form class="m-b-20" [form]="form.get('branches').controls[i]" fxFlex="100" fxLayout="row wrap"></crm-contact-form>
+        <!-- /contact -->
+      </div>
+
+      <mat-action-row>
+        <button type="button" mat-button color="warn" (click)="removeBranch(i)">Usuń</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <!-- /branch -->
+  </mat-accordion>
+
+  <div fxFlex="100" class="m-t-10 m-b-20" fxLayoutAlign="end">
+    <button type="button" mat-raised-button (click)="addBranch()">Dodaj oddział</button>
+  </div>
+</div>

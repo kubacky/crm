@@ -1,0 +1,59 @@
+<form (ngSubmit)="save()" [formGroup]="form" fxFlex="100" fxLayout="row wrap">
+  <h4 class="m-b-10 m-t-20 t-thin">Grupa</h4>
+  <crm-groups-form [form]="form" class="m-b-20" fxFlex="100"></crm-groups-form>
+
+  <!-- name  + alias-->
+  <h4 class="m-b-10 m-t-20 t-thin">Dane ogólne</h4>
+  <div class="m-b-30" fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(60%-20px)" color="accent">
+      <input type="text" matInput placeholder="Nazwa klienta" formControlName="name" [required]="true">
+      <mat-error *ngIf="form.get('name').errors?.isNameTaken">Podana nazwa klienta jest już zajęta</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(40%-20px)" color="accent">
+      <input type="text" matInput placeholder="Nazwa skrócona / kod" formControlName="alias">
+    </mat-form-field>
+  </div>
+  <!-- /name + alias -->
+
+  <!-- address -->
+  <h4 class="m-b-10 m-t-0 t-thin">Adres</h4>
+  <crm-address-form class="m-b-30" [form]="form" fxFlex="100"></crm-address-form>
+  <!-- /address -->
+
+  <!-- taxNo + discount -->
+  <h4 class="m-b-10 m-t-30 t-thin">Dane dodatkowe</h4>
+  <div class="m-b-30" fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" color="accent">
+      <input type="text" matInput placeholder="Nip" formControlName="taxNo">
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" color="accent">
+      <input type="text" matInput placeholder="Numer telefonu" formControlName="phone">
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" color="accent">
+      <input type="email" matInput placeholder="E-mail" formControlName="mail">
+    </mat-form-field>
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" color="accent">
+      <input type="number" matInput placeholder="Rabat" formControlName="discount">
+      <span matSuffix>%</span>
+    </mat-form-field>
+  </div>
+  <!-- /taxNo + discount -->
+
+  <!-- contact -->
+  <h4 class="m-b-10 m-t-30 t-thin">Osoba do kontaktu</h4>
+  <crm-contact-form class="m-b-20" [form]="form" fxFlex="100"></crm-contact-form>
+  <!-- /contact -->
+
+  <!-- branches -->
+  <crm-branches-form [form]="form" fxFlex="100" class="m-t-20"></crm-branches-form>
+  <!-- /branches -->
+
+  <div fxFlex="100" class="m-b-20" fxLayoutAlign="start center">
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid">
+      Zapisz
+    </button>
+    <button type="button" class="m-l-15" mat-button color="warn" (click)="cancel()">
+      Anuluj
+    </button>
+  </div>
+</form>

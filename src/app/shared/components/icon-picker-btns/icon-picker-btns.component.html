@@ -1,0 +1,8 @@
+<h5 class="t-thin">Rodzaj:</h5>
+<button type="button" mat-stroked-button 
+*ngFor="let icon of icons" 
+(click)="form.get('icon').setValue(icon)"
+  class="m-r-10 bg-white" [ngClass]="{'bg-blue' : form.get('icon').value === icon}">
+  <mat-icon [ngClass]="'f-s-22 la la-' + icon">
+  </mat-icon>
+</button>

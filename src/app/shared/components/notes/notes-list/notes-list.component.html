@@ -1,0 +1,25 @@
+<div fxFlex="100" class="p-t-20" fxLayoutAlign="center center" fxLayout="row wrap" *ngIf="notes.length > 0; else noNotes">
+  <mat-card fxFlex="95" [ngClass]="'m-b-20 b-t-3 b-r-3 b-' + note.class" *ngFor="let note of notes; let i = index">
+    <h3 *ngIf="note.title" [ngClass]="'m-b-0 t-' + note.class">
+      {{ note.title }}
+    </h3>
+    <mat-card-subtitle>
+      <small> Utworzono: {{ note.date }} przez: {{ note.firstName }}</small>
+    </mat-card-subtitle>
+    <mat-card-content [ngClass]="'t-' + note.class">
+      {{ note.content }}
+    </mat-card-content>
+    <mat-card-actions *ngIf="!note.locked">
+      <button type="button" mat-flat-button color="accent" (click)="editNote(note)" matTooltip="Edytuj">
+        <mat-icon class="la la-edit f-s-18"></mat-icon>
+      </button>
+      <button type="button" class="m-l-15" mat-button color="warn" matTooltip="Usuń">
+        <mat-icon class="la la-times f-s-20"></mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #noNotes>
+  <h4 class="p-t-50 p-b-50 t-center">Brak notatek</h4>
+</ng-template>

@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <button mat-button class="f-h" type="button" (click)="sidenav.toggle()">
+    <i class="la la-bars"></i>
+  </button>
+  <div class="spacer"></div>
+  <div class="toolbar-separator"></div>
+  <button class="f-h" mat-button>
+    <i class="la la-calendar"></i>
+  </button>
+  <div class="toolbar-separator"></div>
+  <button class="f-h" mat-button>
+    <i class="la la-bell"></i>
+  </button>
+  <div class="toolbar-separator"></div>
+  <button class="f-h" mat-button [matMenuTriggerFor]="user">
+    <i class="la la-user"></i>
+  </button>
+  <mat-menu #user="matMenu">
+    <button mat-menu-item>
+      <mat-icon class="la la-user f-s-24 m-r-25"></mat-icon>
+      <span class="l-h-24"> Mój profil</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="la la-power-off f-s-24 m-r-25"></mat-icon>
+      <span class="l-h-24"> Wyloguj</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

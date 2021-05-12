@@ -1,0 +1,52 @@
+<div fxFlex="100" fxLayout="row wrap" class="task">
+  <div fxFlex="30px" fxLayoutAlign="center center">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon class="la la-ellipsis-v f-s-20"></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon class="la la-edit f-s-24 m-r-25"></mat-icon>
+        <span class="l-h-24"> Edytuj</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="la la-check-circle f-s-24 m-r-25"></mat-icon>
+        <span class="l-h-24"> Oznacz jako wykonane</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="la la-trash f-s-24 m-r-25 t-red"></mat-icon>
+        <span class="l-h-24 t-red"> Usuń</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div fxFlex="50px" class="t-center" fxLayoutAlign="center center" [ngClass]="'t-' + task.class">
+    <mat-icon [ngClass]="'f-s-20 la la-' + task.icon"></mat-icon>
+  </div>
+  <div fxFlex="60px" class="date" fxLayoutAlign="center center" [ngClass]="'t-' + task.class">
+    <time>
+      <h4 class="t-center m-b-0 m-t-0">
+        {{ task.day }}
+      </h4>
+      <p class="t-thin m-t-0 m-b-0">
+        {{ task.month }}
+      </p>
+      <small class="t-thin" *ngIf="task.time">
+        {{ task.time }}
+      </small>
+    </time>
+  </div>
+  <div fxFlex fxLayout="column" class="p-l-15">
+    <div class="task-info">
+      <small class="t-muted t-thin">
+        Dodano: {{ task.dateAdd }} przez: {{ task.firstName }}
+      </small>
+    </div>
+    <div class="task-content" fxFlex="100">
+      <h4 class="m-t-0 m-b-5">
+        {{ task.title }}
+      </h4>
+      <p class="t-thin m-b-5 m-t-0">
+        {{ task.description }}
+      </p>
+    </div>
+  </div>
+</div>

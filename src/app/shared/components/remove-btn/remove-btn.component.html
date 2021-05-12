@@ -1,0 +1,40 @@
+<!-- cancel compact -->
+<button *ngIf="view === 'compact' && action === 'cancel'"
+type="button" mat-button
+color="warn"
+class="m-l-15"
+matTooltip="Skasuj"
+[disabled]="elements.length === 0"
+(click)="doAction()">
+  <mat-icon class="la la-close f-s-22"></mat-icon>
+</button>
+
+<!-- delete compact -->
+<button *ngIf="view === 'compact' && action === 'delete'"
+type="button"
+mat-button
+color="warn"
+class="m-l-15"
+matTooltip="Usuń"
+(click)="doAction()"
+[disabled]="elements.length === 0">
+  <mat-icon class="la la-trash f-s-22"></mat-icon>
+</button>
+
+<!-- cancel full -->
+<button mat-menu-item
+color="warn"
+*ngIf="view === 'full' && action === 'cancel'"
+(click)="doAction()">
+  <mat-icon class="la la-close f-s-24 m-r-25"></mat-icon>
+  <span class="l-h-24"> Skasuj</span>
+</button>
+
+<!-- delete full -->
+<button mat-menu-item
+color="warn"
+*ngIf="view === 'full' && action === 'delete'"
+(click)="doAction()">
+  <mat-icon class="la la-trash f-s-24 m-r-25"></mat-icon>
+  <span class="l-h-24"> Usuń</span>
+</button>

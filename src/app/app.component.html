@@ -1,0 +1,11 @@
+<crm-spinner></crm-spinner>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
+    <crm-sidebar></crm-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="relative">
+    <crm-toolbar [sidenav]="sidenav"></crm-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

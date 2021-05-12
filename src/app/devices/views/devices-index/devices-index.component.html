@@ -1,0 +1,36 @@
+<div fxLayout="row wrap" fxLayoutAlign="center">
+  <div class="m-t-30 m-b-20" fxFlex="100" fxFlex.gt-sm="95" fxLayout="row wrap">
+
+    <!-- controls -->
+    <div fxFlex="100" fxFlex.gt-sm="30">
+      <a routerLink="/devices/create" mat-raised-button color="accent" matTooltip="Dodaj urządzenie">
+        <mat-icon class="la la-plus f-s-22"></mat-icon>
+      </a>
+      <crm-add-service-btn
+      [devices]="selection.selected"
+      [view]="'compact'"></crm-add-service-btn>
+      <crm-remove-btn
+      [view]="'compact'"
+      [action]="'cancel'"
+      [module]="'devices'"
+      [elements]="selection.selected"></crm-remove-btn>
+      <crm-remove-btn
+      [view]="'compact'"
+      [action]="'delete'"
+      [module]="'devices'"
+      [elements]="selection.selected"></crm-remove-btn>
+    </div>
+    <!-- /controls -->
+
+    <!-- filter -->
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="70" color="accent">
+      <input matInput (keyup)="applyFilter($event.target.value); $event.stopPropagation()" placeholder="Szukaj">
+    </mat-form-field>
+    <!-- /filter -->
+
+  </div>
+
+  <mat-card class="p-0 p-t-20 m-b-30" fxFlex="95" fxLayout="row wrap" [hidden]="spinner">
+    <crm-devices-list></crm-devices-list>
+  </mat-card>
+</div>

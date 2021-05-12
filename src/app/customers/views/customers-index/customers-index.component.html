@@ -1,0 +1,66 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+
+  <div class="m-t-30 m-b-20" fxFlex="95" fxLayout="row wrap">
+    <!-- controls -->
+    <div fxFlex="100" fxFlex.gt-sm="30">
+      <a routerLink="/customers/create" mat-raised-button color="accent" matTooltip="Dodaj klienta">
+        <mat-icon class="la la-plus f-s-22"></mat-icon>
+      </a>
+      <!-- <crm-print-summary-btn></crm-print-summary-btn> -->
+      <crm-add-service-btn
+      [devices]="selection"
+      [view]="'compact'"></crm-add-service-btn>
+      <crm-remove-btn
+      [view]="'compact'"
+      [action]="'delete'"
+      [module]="'customers'"
+      [elements]="selection.selected"
+      ></crm-remove-btn>
+    </div>
+    <!-- /controls -->
+
+    <!-- filter -->
+    <mat-form-field fxFlex="100" fxFlex.gt-sm="70" color="accent">
+      <input matInput (keyup)="applyFilter($event.target.value); $event.stopPropagation()" placeholder="Szukaj">
+    </mat-form-field>
+    <!-- /filter -->
+  </div>
+
+  <div fxFlex="95" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-accordion fxFlex="100" fxFlex.gt-sm="calc(25%-20%)" [multi]="true">
+
+      <!-- groups -->
+      <mat-expansion-panel [expanded]="true" *ngIf="groups" class="p-l-0 p-r-0">
+        <mat-expansion-panel-header>
+          Grupy
+        </mat-expansion-panel-header>
+        <mat-selection-list #groupsList
+          (selectionChange)="selectCategory(groupsList, 'groups'); provincesList.deselectAll()">
+          <mat-list-option *ngFor="let group of groups" [value]="group.id">
+            {{group.name}} <span class="f-s-12 t-dark-gray t-thin m-l-5 relative">{{group.count}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+      <!-- /groups -->
+
+      <!-- provinces -->
+      <mat-expansion-panel [expanded]="true" *ngIf="provinces" class="p-l-0 p-r-0 m-b-20">
+        <mat-expansion-panel-header>
+          Województwa
+        </mat-expansion-panel-header>
+        <mat-selection-list #provincesList
+          (selectionChange)="selectCategory(provincesList, 'provinces'); groupsList.deselectAll()">
+          <mat-list-option *ngFor="let province of provinces" [value]="province.id">
+            {{province.name}} <span class="f-s-12 t-dark-gray t-thin m-l-5 relative">{{province.count}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+      <!-- /provinces -->
+
+    </mat-accordion>
+
+    <mat-card class="p-0 p-t-20 m-b-30" fxFlex="100" fxFlex.gt-sm="calc(75%-20%)">
+      <crm-customers-list fxFlex="100"></crm-customers-list>
+    </mat-card>
+  </div>
+</div>

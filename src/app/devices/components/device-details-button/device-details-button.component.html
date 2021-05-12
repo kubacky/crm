@@ -1,0 +1,29 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+  <mat-icon class="la la-ellipsis-v f-s-20"></mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <!--
+  <button mat-menu-item (click)="quickView()">
+    <mat-icon class="la la-info-circle f-s-24 m-r-25"></mat-icon>
+    <span class="l-h-24"> Podgląd</span>
+  </button> -->
+  <crm-add-service-btn
+  [view]="'full'"
+  [devices]="[device]"></crm-add-service-btn>
+  <button mat-menu-item [routerLink]="['/devices/edit/' + device.id]">
+    <mat-icon class="la la-edit f-s-24 m-r-25"></mat-icon>
+    <span class="l-h-24"> Edytuj</span>
+  </button>
+  <crm-remove-btn
+  [view]="'full'"
+  [action]="'cancel'"
+  [module]="'devices'"
+  [elements]="[device]">
+  </crm-remove-btn>
+  <crm-remove-btn
+  [view]="'full'"
+  [action]="'delete'"
+  [module]="'devices'"
+  [elements]="[device]">
+  </crm-remove-btn>
+</mat-menu>

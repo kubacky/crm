@@ -1,0 +1,9 @@
+<button type="button" mat-raised-button color="accent" class="m-l-15" (click)="addService()"
+  [disabled]="devices.length === 0" matTooltip="Dodaj serwis" *ngIf="view === 'compact'">
+  <mat-icon class="la la-wrench f-s-22"></mat-icon>
+</button>
+
+<button mat-menu-item (click)="addService()" *ngIf="view === 'full'">
+  <mat-icon class="la la-wrench f-s-24 m-r-25"></mat-icon>
+  <span class="l-h-24"> Dodaj serwis</span>
+</button>

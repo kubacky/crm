@@ -1,0 +1,29 @@
+<form [formGroup]="form" fxFlex="100" (submit)="save()">
+
+  <h4 class="t-thin m-t-0">Utwórz notatkę</h4>
+  <mat-dialog-content fxLayout="row wrap">
+    <mat-form-field fxFlex="100" color="accent">
+      <input type="text" formControlName="title" matInput placeholder="Tytuł">
+    </mat-form-field>
+    <mat-form-field fxFlex="100" class="m-t-20">
+      <textarea matInput color="accent" formControlName="content" rows="5" [required]="true" placeholder="Treść"></textarea>
+    </mat-form-field>
+    <div fxFlex="100" class="m-b-10">
+      <crm-color-picker-btns [form]="form"></crm-color-picker-btns>
+    </div>
+
+  </mat-dialog-content>
+
+  <!-- controls -->
+  <mat-dialog-actions>
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid">
+      Zapisz
+    </button>
+    <button type="button" class="m-l-15" mat-button color="warn" mat-dialog-close>
+      Anuluj
+    </button>
+  </mat-dialog-actions>
+  <!-- /controls -->
+
+  <crm-edit-note [form]="form" [note]="note"></crm-edit-note>
+</form>

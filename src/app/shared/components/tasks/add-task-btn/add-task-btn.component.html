@@ -1,0 +1,9 @@
+<button type="button" mat-raised-button color="accent" class="m-l-15" (click)="addTask()"
+  [disabled]="elements.length === 0" matTooltip="Dodaj zadanie" *ngIf="view === 'compact'">
+  <mat-icon class="la la-calendar-o f-s-22"></mat-icon>
+</button>
+
+<button mat-menu-item (click)="addTask()" *ngIf="view === 'full'">
+  <mat-icon class="la la-calendar-o f-s-24 m-r-25"></mat-icon>
+  <span class="l-h-24"> Dodaj zadanie</span>
+</button>

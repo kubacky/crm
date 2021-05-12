@@ -1,0 +1,11 @@
+<h5 class="t-thin">Kolor:</h5>
+<button type="button" mat-stroked-button 
+*ngFor="let color of colors" 
+(click)="form.get('class').setValue(color)"
+  [ngClass]="'m-r-10 bg-'+color">
+  <mat-icon *ngIf="form.get('class').value === color">
+    check_box
+  </mat-icon>
+  <mat-icon *ngIf="form.get('class').value !== color">
+  </mat-icon>
+</button>

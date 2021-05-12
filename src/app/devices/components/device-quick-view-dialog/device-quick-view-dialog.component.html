@@ -1,0 +1,73 @@
+<h3 *ngIf="device" class="t-thin" mat-dialog-title>{{ device.registryNo }}</h3>
+<h3 *ngIf="!device" class="t-thin" mat-dialog-title>...</h3>
+<mat-dialog-content class="p-b-10 p-t-10">
+  <div *ngIf="!device" fxFlex="100" fxLayoutAlign="center center">
+    <mat-progress-spinner color="accent" mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <div *ngIf="device" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="20px">
+    <div fxFlex="100" fxLayout="row wrap" fxFlex.gt-sm="calc(30%-20px)">
+      <h5 class="t-thin m-b-5 m-t-0">Dane klienta</h5>
+      <mat-card fxFlex="100" class="m-b-15">
+        <h4 class="m-t-0">
+          {{ device.customer.name }}
+          <br>
+          <span class="t-dark-gray t-thin">
+            {{ device.address.street }}, {{ device.address.postcode }} {{ device.address.city }}
+          </span>
+          <br>
+          <small class="t-dark-gray t-thin">Województwo {{ device.address.province }}</small>
+        </h4>
+        <h4 class="m-b-0"> {{ device.contact.name }} <small *ngIf="device.contact.workplace"> - {{ device.contact.workplace }}</small>
+          <br>
+          <span *ngIf="device.contact.phone" class="t-thin">tel: {{ device.contact.phone }}</span>
+          <br>
+          <span *ngIf="device.contact.mail" class="t-thin">mail: {{ device.contact.mail }}</span>
+        </h4>
+      </mat-card>
+
+      <h5 class="t-thin m-b-5 m-t-0">Właściwości</h5>
+      <mat-card fxFlex="100">
+        <h4 class="m-t-0 m-b-0" *ngFor="let property of device.properties">
+          <small class="t-dark-gray t-thin">{{ property.name }}</small>
+          <br> {{ property.value }}
+        </h4>
+        <h4 class="m-t-10 m-b-0" *ngIf="device.purchaseDate">
+          <small class="t-dark-gray t-thin">Data zakupu</small>
+          <br> {{ device.purchaseDate }}
+        </h4>
+        <h4 class="m-t-10 m-b-0" *ngIf="device.nextService">
+          <small class="t-dark-gray t-thin">Następny serwis</small>
+          <br> {{ device.nextService }}
+        </h4>
+      </mat-card>
+    </div>
+    <div fxFlex="100" fxLayout="row wrap" fxFlex.gt-sm="calc(70%-20px)">
+      <h5 class="t-thin m-b-5 m-t-0">Serwisy</h5>
+      <mat-card fxFlex="100" class="m-b-15">
+        <h4 class="t-thin" *ngIf="device.services.length === 0">
+          Brak przeprowadzonych serwisów
+        </h4>
+        
+      </mat-card>
+      <h5 class="t-thin m-b-5 m-t-0">Notatki</h5>
+      <mat-card fxFlex="100" class="m-b-15">
+        <h4 class="t-thin" *ngIf="device.notes.length === 0">
+          Brak notatek
+        </h4>
+      </mat-card>
+      <h5 class="t-thin m-b-5 m-t-0">Zadania</h5>
+      <mat-card fxFlex="100" class="m-b-15">
+        <h4 class="t-thin" *ngIf="device.tasks.length === 0">
+          Brak zaplanowanych zadań
+        </h4>
+      </mat-card>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button type="button" mat-button mat-dialog-close>
+    Zamknij
+  </button>
+</mat-dialog-actions>

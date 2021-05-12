@@ -1,0 +1,5 @@
+<div fxFlex="100" *ngIf="groups">
+  <mat-checkbox *ngFor="let group of groups; let i = index" [checked]="isAssigned(group.id)" (change)="toggleGroup(group.id)"
+    class="m-r-20">{{ group.name }}
+  </mat-checkbox>
+</div>

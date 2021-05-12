@@ -1,0 +1,76 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="">
+        <i class="la la-home"></i>
+        Pulpit
+      </a>
+    </li>
+    <li>
+      <a routerLink="/warehouse">
+        <i class="la la-archive"></i>
+        Magazyn
+      </a>
+    </li>
+    <li (click)="toggle($event)">
+      <a class="pointer">
+        <i class="la la-suitcase"></i>
+        Rejestr produktów
+      </a>
+      <i class="la la-angle-left expand"></i>
+      <ul class="submenu">
+        <li>
+          <a routerLink="/devices">
+            <mat-icon class="la la-list-ul m-r-5"></mat-icon>
+            Przeglądaj
+          </a>
+        </li>
+        <li>
+          <a routerLink="/devices/create">
+            <mat-icon class="la la-plus m-r-5"></mat-icon>
+            Dodaj urządzenie
+          </a>
+        </li>
+        <li>
+          <a href="#">Dupa</a>
+        </li>
+        <li>
+          <a href="#">Dupa</a>
+        </li>
+      </ul>
+    </li>
+    <li (click)="toggle($event)">
+      <a class="pointer">
+        <i class="la la-male"></i>
+        Klienci
+      </a>
+      <i class="la la-angle-left expand"></i>
+      <ul class="submenu">
+        <li>
+          <a routerLink="/customers">
+            <mat-icon class="la la-list-ul m-r-5"></mat-icon>
+            Przeglądaj
+          </a>
+        </li>
+        <li>
+          <a routerLink="/customers/create">
+            <mat-icon class="la la-plus m-r-5"></mat-icon>
+            Dodaj klienta
+          </a>
+        </li>
+        <li>
+          <a href="#">Dupa</a>
+        </li>
+        <li>
+          <a href="#">Dupa</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">
+        <i class="la la-users"></i>
+        Użytkownicy
+      </a>
+    </li>
+  </ul>
+</nav>

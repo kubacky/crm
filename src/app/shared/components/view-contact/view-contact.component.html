@@ -1,0 +1,14 @@
+<div *ngIf="contact">
+  <span class="t-thin" *ngIf="contact.name.length !== 0">Osoba do kontaktu:</span>
+  <h4 class="m-t-0" *ngIf="contact.name.length !== 0">
+    {{ contact.name }}
+    <br>
+    <small class="t-thin" *ngIf="contact.workplace.length !== 0"> {{ contact.workplace}} </small>
+    </h4>
+
+  <span class="t-thin" *ngIf="contact.phone.length !== 0">Numer telefonu:</span>
+  <a href="tel:{{contact.phone}}"><h4 class="m-t-0" *ngIf="contact.phone.length !== 0">{{ contact.phone }}</h4></a>
+
+  <span class="t-thin" *ngIf="contact.mail.length !== 0">E-mail:</span>
+  <a href="mailto:{{contact.mail}}"><h4 class="m-t-0" *ngIf="contact.mail.length !== 0">{{ contact.mail }}</h4></a>
+</div>

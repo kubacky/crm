@@ -1,0 +1,32 @@
+ul {
+  list-style-type: none;
+  position: relative;
+}
+
+ul:before {
+  content: ' ';
+  background: #d4d9df;
+  display: inline-block;
+  position: absolute;
+  left: 32px;
+  width: 2px;
+  height: 100%;
+  z-index: 400;
+}
+
+ul>li {
+  padding-left: 20px;
+}
+
+ul>li:before {
+  content: ' ';
+  background: white;
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #22c0e8;
+  left: 20px;
+  width: 20px;
+  height: 20px;
+  z-index: 400;
+}

@@ -1,0 +1,68 @@
+<div fxFlex="100" fxLayout="row wrap" *ngIf="services.length !== 0 else noServices">
+  <mat-table [dataSource]="dataSource" fxFlex="100" multiTemplateDataRows>
+    <!-- date -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef fxFlex="30">
+        Data serwisu
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="30">
+        {{ row.date }}
+      </mat-cell>
+    </ng-container>
+    <!-- .date -->
+
+    <!-- technician -->
+    <ng-container matColumnDef="technician">
+      <mat-header-cell *matHeaderCellDef fxFlex="30">
+        Serwisant
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="30">
+        {{ row.technician.name }}
+      </mat-cell>
+    </ng-container>
+    <!-- .technician -->
+
+    <!-- type -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef fxFlex="40">
+        Rodzaj <small class="m-l-5"> / status</small>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="40">
+        {{ row.type }} <small class="m-l-5"> / {{ row.status }}</small>
+      </mat-cell>
+    </ng-container>
+    <!-- .type -->
+
+    <!-- details + buttons -->
+    <ng-container matColumnDef="expandedDetails">
+      <mat-cell class="element-details" *matCellDef="let row"
+        [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+        <div fxFlex="100" fxLayout="row wrap">
+          <div fxFlex="100" class="m-t-20" *ngIf="row.comment">
+            Uwagi serwisanta: <strong>{{ row.comment }}</strong>
+          </div>
+          <div fxFlex="100" class="m-t-20 p-b-20 t-center">
+            <button type="button" mat-flat-button color="accent" (click)="editService(row)" matTooltip="Edytuj">
+              <mat-icon class="la la-edit f-s-18"></mat-icon>
+            </button>
+            <button type="button" class="m-l-15" mat-button color="warn" matTooltip="Usuń">
+              <mat-icon class="la la-times f-s-20"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <!-- /details + buttons -->
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns;" class="pointer p-t-5 p-b-5"
+      (click)="expandedElement = expandedElement === row ? null : row"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetails'];" class="details-row"
+      [ngClass]="{'expanded': row == expandedElement }"></mat-row>
+
+  </mat-table>
+</div>
+
+<ng-template #noServices>
+  <h4 class="t-center p-t-50 p-b-50">Brak przeprowadzonych serwisów</h4>
+</ng-template>

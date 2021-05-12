@@ -1,0 +1,51 @@
+<div fxLayout="row wrap" fxFlex="100">
+
+  <mat-table [dataSource]="customers" fxFlex="100" matSort>
+    <!-- select -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="mat-column-select" fxFlex="50px">
+        {{ selection.selected.length }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="mat-column-select" fxFlex="50px">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectRow(row) : null"
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- .select -->
+
+    <!-- menu -->
+    <ng-container matColumnDef="menu">
+      <mat-header-cell *matHeaderCellDef fxFlex="50px">
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="50px">
+      </mat-cell>
+    </ng-container>
+    <!-- /menu -->
+
+
+    <!--name -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwa </mat-header-cell>
+      <mat-cell *matCellDef="let customer" fxLayout="row wrap">
+        {{ customer.name }}
+      </mat-cell>
+    </ng-container>
+    <!-- /name -->
+
+    <!-- city-->
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef>Miejscowość</mat-header-cell>
+      <mat-cell *matCellDef="let customer" fxLayout="row wrap">
+        {{ customer.address.city }} /
+        {{ customer.address.province }}
+      </mat-cell>
+    </ng-container>
+    <!-- /city -->
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let customer; columns: columns;" (click)="viewCustomer(customer.id)" class="pointer p-t-5 p-b-5"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="20" [pageSizeOptions]="[20, 40, 60]" [showFirstLastButtons]="true" [hidden]="spinner">
+  </mat-paginator>
+</div>

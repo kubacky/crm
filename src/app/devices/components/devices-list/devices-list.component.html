@@ -1,0 +1,77 @@
+<div fxLayout="row wrap">
+  <mat-table [dataSource]="devices" fxFlex="100" matSort>
+
+    <!-- select -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef class="mat-column-select" fxFlex="50px">
+        {{ selection.selected.length }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="mat-column-select" fxFlex="50px">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectRow(row, true) : null" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <!-- .select -->
+
+    <!-- menu -->
+    <ng-container matColumnDef="menu">
+      <mat-header-cell *matHeaderCellDef fxFlex="50px">
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="50px">
+        <crm-device-details-button [device]="row"></crm-device-details-button>
+      </mat-cell>
+    </ng-container>
+    <!-- /menu -->
+
+
+    <!-- registryNo-->
+    <ng-container matColumnDef="registryNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Numer rejestru </mat-header-cell>
+      <mat-cell *matCellDef="let device" fxLayout="row wrap">
+        <span fxFlex="100">
+          {{ device.registryNo }}
+        </span>
+        <small fxFlex="100">
+          {{ device.customer }}
+        </small>
+      </mat-cell>
+    </ng-container>
+    <!-- /registryNo -->
+
+    <!-- city-->
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="240px"></mat-header-cell>
+      <mat-cell *matCellDef="let device" fxFlex="240px" fxLayout="row wrap">
+        <span fxFlex="100" class="t-center">
+          {{ device.city }}
+        </span>
+        <small fxFlex="100" class="t-grey t-center">
+          {{ device.province }}
+        </small>
+      </mat-cell>
+    </ng-container>
+    <!-- /city -->
+
+    <!-- purchaseDate-->
+    <ng-container matColumnDef="purchaseDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="200px"> Data zakupu </mat-header-cell>
+      <mat-cell *matCellDef="let device" fxFlex="200px">
+        {{ device.purchasePrettyDate }}
+      </mat-cell>
+    </ng-container>
+    <!-- /purchaseDate -->
+
+    <!-- lastService-->
+    <ng-container matColumnDef="lastServiceDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="175px"> Ostatni serwis </mat-header-cell>
+      <mat-cell *matCellDef="let device" fxFlex="175px">
+        {{ device.lastService }}
+      </mat-cell>
+    </ng-container>
+    <!-- /purchaseDate -->
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columns;" (click)="viewDevice(row.id)" class="pointer p-t-5 p-b-5"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="20" [pageSizeOptions]="[20, 40, 60]" [showFirstLastButtons]="true" [hidden]="spinner"></mat-paginator>
+</div>

@@ -1,0 +1,14 @@
+<div fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px" [formGroup]="form.get('contact')">
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(30%-20px)"color="accent">
+    <input type="text" matInput placeholder="Imię i nazwisko" formControlName="name">
+  </mat-form-field>
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(30%-20px)" color="accent">
+    <input type="text" matInput placeholder="Stanowisko" formControlName="workplace">
+  </mat-form-field>
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(20%-20px)" color="accent">
+    <input type="text" matInput placeholder="Numer telefonu" formControlName="phone">
+  </mat-form-field>
+  <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(20%-20px)" color="accent">
+    <input type="text" matInput placeholder="Adres e-mail" formControlName="mail">
+  </mat-form-field>
+</div>

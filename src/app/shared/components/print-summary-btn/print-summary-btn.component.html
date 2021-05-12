@@ -1,0 +1,18 @@
+<button type="button" mat-mini-fab color="primary" class="m-l-15" [matMenuTriggerFor]="print" matTooltip="Drukuj zestawienie">
+  <mat-icon class="la la-print f-s-20"></mat-icon>
+</button>
+
+<mat-menu #print="matMenu">
+  <button mat-menu-item>
+    <mat-icon class="la la-bars f-s-24 m-r-25"></mat-icon>
+    <span class="l-h-24"> Drukuj wszystko</span> 
+  </button>
+  <button mat-menu-item [disabled]="selection.selected.length === 0">
+    <mat-icon class="la la-list-alt f-s-24 m-r-25"></mat-icon>
+    <span class="l-h-24"> Drukuj zaznaczone</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon class="la la-cogs f-s-24 m-r-25"></mat-icon>
+    <span class="l-h-24"> Ustawienia wydruku</span>
+  </button>
+</mat-menu>

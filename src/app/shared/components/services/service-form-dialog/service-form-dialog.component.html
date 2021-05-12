@@ -1,0 +1,62 @@
+<form [formGroup]="form" (submit)="save()" *ngIf="technicians">
+  <h4 class="t-thin m-t-0">{{ title }}</h4>
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
+
+    <!-- date + technician + price -->
+    <mat-form-field color="accent" fxFlex="100" fxFlex.gt-sm="40">
+      <input matInput [matDatepicker]="date" placeholder="Data serwisu" [max]="today" formControlName="date"
+        [required]="true">
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field color="accent" fxFlex="100" fxFlex.gt-sm="40">
+      <mat-label>Serwisant</mat-label>
+      <mat-select formControlName="technicianId" [required]="true">
+        <mat-option *ngFor="let tech of technicians" [value]="tech.id">
+          {{tech.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field color="accent" fxFlex="100" fxFlex.gt-sm="20">
+      <input matInput placeholder="Cena" formControlName="price">
+    </mat-form-field>
+    <!-- /date + technician + price -->
+
+    <!-- type + status -->
+    <div fxFlex="100" fxFlex.gt-sm="50" class="m-b-10">
+      <h5 class="t-thin">Rodzaj</h5>
+      <mat-radio-group formControlName="type">
+        <mat-radio-button class="m-r-20" value="1">Mobilny - u klienta</mat-radio-button>
+        <mat-radio-button class="m-r-20" value="2">Stacjonarny</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="50" class="m-b-10">
+      <h5 class="t-thin">
+        Status</h5>
+      <mat-radio-group formControlName="status">
+        <mat-radio-button class="m-r-20" value="1">Rozpoczęty</mat-radio-button>
+        <mat-radio-button class="m-r-20" value="2">Zakończony</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <!-- /type + status -->
+
+    <!-- comment -->
+    <mat-form-field color="accent" fxFlex="100">
+      <mat-label>Uwagi</mat-label>
+      <textarea matInput formControlName="comment" rows="3"></textarea>
+    </mat-form-field>
+    <!-- /comment -->
+  </div>
+
+  <!-- controls -->
+  <mat-dialog-actions>
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid">
+      Zapisz
+    </button>
+    <button type="button" class="m-l-15" mat-button color="warn" mat-dialog-close>
+      Anuluj
+    </button>
+  </mat-dialog-actions>
+  <crm-edit-service [form]="form"></crm-edit-service>
+  <!-- /controls -->
+</form>

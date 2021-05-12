@@ -1,0 +1,106 @@
+<div fxLayout="row wrap" fxLayoutAlign="center" *ngIf="customer">
+
+  <!-- controls -->
+  <div fxFlex="95" class="m-t-20 m-b-20">
+    <a [routerLink]="'/customers/edit/' + customer.id" mat-raised-button color="accent" matTooltip="Edytuj">
+      <mat-icon class="la la-edit f-s-22"></mat-icon>
+    </a>
+    <crm-add-service-btn
+    [view]="'compact'"
+    [devices]="[customer.devices]"></crm-add-service-btn>
+    <crm-add-note-btn
+    [view]="'compact'"
+    [elements]="[customer]"
+    [type]="'customer'"
+    [sourceId]="sourceId">
+    </crm-add-note-btn>
+    <crm-add-task-btn
+    [view]="'compact'"
+    [elements]="[customer]"
+    [type]="'customer'"
+    [sourceId]="sourceId">
+    </crm-add-task-btn>
+    <crm-remove-btn
+    [view]="'compact'"
+    [action]="'cancel'"
+    [module]="'customers'"
+    [elements]="[customer]"></crm-remove-btn>
+    <crm-remove-btn
+    [view]="'compact'"
+    [action]="'delete'"
+    [module]="'customers'"
+    [elements]="[customer]"></crm-remove-btn>
+  </div>
+  <!-- /controls -->
+
+  <div fxFlex="95" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-accordion fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" [multi]="true">
+
+      <!-- headquarters -->
+      <mat-expansion-panel [expanded]="true" class="t-center">
+        <i class="la la-building f-s-42 m-t-20"></i>
+        <p class="f-s-20 t-white">{{ customer.name }}</p>
+        <crm-view-contact [contact]="customer.contact"></crm-view-contact>
+      </mat-expansion-panel>
+      <!-- /headquarters -->
+
+      <!-- branches -->
+      <mat-expansion-panel *ngFor="let branch of customer.branches" [expanded]="true" class="t-center">
+        <i class="la la-home f-s-42 m-t-20"></i>
+        <p class="f-s-20 t-white">{{ branch.name }}</p>
+      </mat-expansion-panel>
+      <!-- /branches -->
+
+    </mat-accordion>
+
+    <mat-accordion fxFlex="100" fxFlex.gt-sm="calc(75%-20px)" [multi]="true">
+
+      <!-- tabs -->
+      <mat-expansion-panel [expanded]="true" class="p-0">
+        <mat-tab-group color="accent">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-suitcase f-s-22 m-r-10"></mat-icon>
+              Urządzenia
+              <span class="tab-badge">{{ customer.devices.length }}</span>
+            </ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-comment f-s-22 m-r-10"></mat-icon>
+              Notatki
+              <span class="tab-badge">{{ customer.notes.length }}</span>
+            </ng-template>
+            <crm-notes-list [notes]="customer.notes"></crm-notes-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-list-alt f-s-22 m-r-10"></mat-icon>
+              Zadania
+              <span class="tab-badge">{{ customer.tasks.length }}</span>
+            </ng-template>
+            <crm-tasks-list [tasks]="customer.tasks"></crm-tasks-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-calendar-o f-s-22 m-r-10"></mat-icon>
+              Historia
+              <span class="tab-badge">{{ customer.events.length }}</span>
+            </ng-template>
+            <crm-events-list [events]="customer.events"></crm-events-list>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+      <!-- /tabs -->
+
+      <!-- map -->
+      <mat-expansion-panel [expanded]="true" class="p-0 m-b-20">
+        <agm-map [latitude]="customer.address.lat" [longitude]="customer.address.lng" [zoom]="10">
+          <agm-marker [latitude]="customer.address.lat" [longitude]="customer.address.lng"></agm-marker>
+        </agm-map>
+      </mat-expansion-panel>
+      <!-- /map -->
+
+    </mat-accordion>
+  </div>
+</div>

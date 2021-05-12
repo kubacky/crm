@@ -1,0 +1,15 @@
+@import 'variables.scss';
+@import 'elements/normalize.scss';
+@import 'elements/paddings.scss';
+@import 'elements/margins.scss';
+@import 'elements/borders.scss';
+@import 'elements/positions.scss';
+@import 'elements/dimensions.scss';
+@import 'elements/fonts.scss';
+@import 'elements/backgrounds.scss';
+@import 'elements/shared.scss';
+
+body {
+  background: #eee;
+  font-family: "Roboto";
+}

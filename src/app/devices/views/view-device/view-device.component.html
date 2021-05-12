@@ -1,0 +1,119 @@
+<div fxLayout="row wrap" fxLayoutAlign="center" *ngIf="device">
+
+  <!-- controls -->
+  <div fxFlex="95" class="m-t-20 m-b-20">
+    <a [routerLink]="'/devices/edit/' + device.id" mat-raised-button color="accent" matTooltip="Edytuj">
+      <mat-icon class="la la-edit f-s-22"></mat-icon>
+    </a>
+    <crm-add-service-btn
+    [view]="'compact'"
+    [devices]="[device]"></crm-add-service-btn>
+    <crm-add-note-btn
+    [view]="'compact'"
+    [elements]="[device]"
+    [type]="'device'"
+    [sourceId]="sourceId"></crm-add-note-btn>
+    <crm-add-task-btn
+    [view]="'compact'"
+    [elements]="[device]"
+    [type]="'device'"
+    [sourceId]="sourceId"></crm-add-task-btn>
+    <crm-remove-btn
+    [view]="'compact'"
+    [action]="'cancel'"
+    [module]="'devices'"
+    [elements]="[device]"></crm-remove-btn>
+    <crm-remove-btn
+    [view]="'compact'"
+    [action]="'delete'"
+    [module]="'devices'"
+    [elements]="[device]"></crm-remove-btn>
+  </div>
+  <!-- /controls -->
+
+  <div fxFlex="95" fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-accordion fxFlex="100" fxFlex.gt-sm="calc(25%-20px)" [multi]="true">
+
+      <!-- contact -->
+      <mat-expansion-panel [expanded]="true" class="t-center">
+        <i class="la la-suitcase f-s-42 m-t-20 t-white"></i>
+        <p class="f-s-20 t-white">{{ device.registryNo }}</p>
+        <span class="t-thin">Właściciel:</span>
+        <h4 class="m-t-0 pointer" click="showCustomerInfo()">{{ device.customer.name }}</h4>
+        <crm-view-contact [contact]="device.contact"></crm-view-contact>
+      </mat-expansion-panel><!-- /contact -->
+
+
+      <!-- data -->
+      <mat-expansion-panel [expanded]="true" class="m-b-20">
+        <mat-expansion-panel-header>
+          Dane urządzenia:
+        </mat-expansion-panel-header>
+
+        <span class="t-thin">Data zakupu:</span>
+        <h4 class="m-t-0">{{ device.purchasePrettyDate }}</h4>
+
+        <span class="t-thin">Następny serwis:</span>
+        <h4 class="m-t-0">{{ device.nextService }}</h4>
+
+        <div *ngFor="let property of device.properties">
+          <span class="t-thin">{{ property.name }}:</span>
+          <h4 class="m-t-0">{{ property.value }}</h4>
+        </div>
+      </mat-expansion-panel>
+      <!-- /data -->
+
+    </mat-accordion>
+
+    <mat-accordion fxFlex="100" fxFlex.gt-sm="calc(75%-20px)" [multi]="true">
+
+      <!-- tabs -->
+      <mat-expansion-panel [expanded]="true" class="p-0">
+        <mat-tab-group color="accent">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-wrench f-s-22 m-r-10"></mat-icon>
+              Serwisy
+              <span class="tab-badge">{{ device.services.length }}</span>
+            </ng-template>
+            <crm-services-list [services]="device.services"></crm-services-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-comment f-s-22 m-r-10"></mat-icon>
+              Notatki
+              <span class="tab-badge">{{ device.notes.length }}</span>
+            </ng-template>
+            <crm-notes-list [notes]="device.notes"></crm-notes-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-list-alt f-s-22 m-r-10"></mat-icon>
+              Zadania
+              <span class="tab-badge">{{ device.tasks.length }}</span>
+            </ng-template>
+            <crm-tasks-list [tasks]="device.tasks"></crm-tasks-list>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="la la-calendar-o f-s-22 m-r-10"></mat-icon>
+              Historia
+              <span class="tab-badge">{{ device.events.length }}</span>
+            </ng-template>
+            <crm-events-list [events]="device.events"></crm-events-list>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+      <!-- /tabs -->
+
+      <!-- map -->
+      <mat-expansion-panel [expanded]="true" class="p-0 m-b-20">
+        <agm-map [latitude]="device.address.lat" [longitude]="device.address.lng" [zoom]="10">
+          <agm-marker [latitude]="device.address.lat" [longitude]="device.address.lng"></agm-marker>
+        </agm-map>
+      </mat-expansion-panel>
+      <!-- /map -->
+
+    </mat-accordion>
+  </div>
+</div>

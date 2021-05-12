@@ -1,0 +1,21 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$primary-color: ( 50: #ffffff, 100: #ffffff, 200: #ffffff, 300: #f1f1f1, 400: #e1e1e1, 500: #d2d2d2, 600: #c3c3c3, 700: #b3b3b3, 800: #a4a4a4, 900: #959595, A100: #ffffff, A200: #ffffff, A400: #eee9e9, A700: #e0dddd, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #000000, 800: #000000, 900: #000000, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$accent-color: ( 50: #ffffff, 100: #ffffff, 200: #d2e7fb, 300: #90c5f5, 400: #74b7f3, 500: #58a8f0, 600: #3c99ed, 700: #208beb, 800: #137bd9, 900: #116bbd, A100: #ffffff, A200: #e2f1ff, A400: #7dc1fe, A700: #6bb4f6, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$cbz-app-primary: mat-palette($primary-color);
+$cbz-app-accent: mat-palette($accent-color);
+// The warn palette is optional (defaults to red).
+$cbz-app-warn: mat-palette($mat-red);
+// Create the theme object (a Sass map containing all of the palettes).
+$cbz-app-theme: mat-light-theme($cbz-app-primary, $cbz-app-accent, $cbz-app-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($cbz-app-theme);

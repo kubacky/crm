@@ -1,0 +1,69 @@
+<form [formGroup]="form" fxFlex="100" (submit)="save()">
+
+  <h4 class="t-thin m-t-0">Utwórz zadanie</h4>
+  <mat-dialog-content fxLayout="row wrap">
+
+    <!-- date + time + title -->
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutGap="20px" class="m-b-10">
+      <mat-form-field fxFlex="calc(60%-20px)" fxFlex.gt-sm="calc(20%-20px)" color="accent">
+        <input type="text" formControlName="date" matInput placeholder="Data" [required]="true"
+          [matDatepicker]="datepicker">
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="calc(40%-20px)" fxFlex.gt-sm="calc(15%-20px)" color="accent">
+        <input type="text" formControlName="time" matInput placeholder="Godzina" [ngxTimepicker]="timepicker"
+          [format]="24">
+        <ngx-material-timepicker-toggle matSuffix [for]="timepicker">
+          <mat-icon class="picker-toggle" ngxMaterialTimepickerToggleIcon>
+            access_time
+          </mat-icon>
+        </ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #timepicker [confirmBtnTmpl]="confirmBtn" [cancelBtnTmpl]="cancelBtn" [minutesGap]="5">
+        </ngx-material-timepicker>
+      </mat-form-field>
+      <ng-template #confirmBtn>
+        <button type="button" class="m-l-10" mat-raised-button color="accent">
+          OK
+        </button>
+      </ng-template>
+      <ng-template #cancelBtn>
+        <button type="button" mat-button color="warn">
+          Anuluj
+        </button>
+      </ng-template>
+
+      <mat-form-field fxFlex="100" fxFlex.gt-sm="calc(65%-20px)" color="accent">
+        <input type="text" formControlName="title" matInput placeholder="Tytuł" [required]="true">
+      </mat-form-field>
+    </div>
+    <!-- /date + time + title -->
+
+    <!-- icon + color -->
+    <div fxFlex="100" fxLayout="row wrap" class="m-b-10">
+      <crm-icon-picker-btns fxFlex="50" [form]="form"></crm-icon-picker-btns>
+      <crm-color-picker-btns fxFlex="50" [form]="form"></crm-color-picker-btns>
+    </div>
+    <!-- /icon + color -->
+
+    <mat-form-field fxFlex="100" class="m-t-20">
+      <textarea matInput color="accent" formControlName="description" rows="5"
+        placeholder="Treść"></textarea>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+  <!-- controls -->
+  <mat-dialog-actions>
+    <button type="submit" mat-raised-button color="accent" [disabled]="form.invalid">
+      Zapisz
+    </button>
+    <button type="button" class="m-l-15" mat-button color="warn" mat-dialog-close>
+      Anuluj
+    </button>
+  </mat-dialog-actions>
+  <!-- /controls -->
+
+  <crm-edit-note [form]="form" [note]="note"></crm-edit-note>
+</form>
